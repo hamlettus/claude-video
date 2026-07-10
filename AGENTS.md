@@ -33,7 +33,11 @@ Agent Skills package that gives an agent a video input. Installable across Claud
 ## Commands
 
 ```bash
-# Tests (stdlib + pytest; ffmpeg required for frame tests)
+# One-time dev setup: runtime is pure stdlib, so the only Python dev dep is pytest.
+# There is no requirements file — bootstrap the venv by hand.
+python3 -m venv .venv && .venv/bin/pip install pytest
+
+# Tests (stdlib + pytest; ffmpeg/ffprobe on PATH required — most tests synthesize clips)
 .venv/bin/pytest -q                # or: python3 -m pytest -q
 
 # Build the claude.ai upload bundle (archives skills/watch/ as the bundle root)
