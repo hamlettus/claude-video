@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mulligan & Co. — a subscription for customised golf consumables: tees, glove, cap, polo and balls, personalised from a simple logo to a full custom design.">
+<title>Mulligan & Co. — Custom Golf Consumables, Delivered</title>
+<style>
+  :root {
+    /* Dark is the committed default world — the course at dusk */
+    --pine: #0E1611;
+    --pine-2: #131E17;
+    --surface: #17251D;
+    --surface-2: #1F3128;
+    --hairline: rgba(240, 238, 228, 0.12);
+    --chalk: #F0EEE4;
+    --chalk-dim: #CBCBBD;
+    --sage: #9DB0A2;
+    --sage-dim: #6E8177;
+    --brass: #C9A24B;
+    --brass-bright: #E0BC66;
+    --brass-deep: #8A6C2C;
+    --turf: #6FA05E;
+    --glow: rgba(201, 162, 75, 0.24);
+
+    --serif: "Hoefler Text", "Didot", "Bodoni MT", "Playfair Display", Georgia, "Times New Roman", serif;
+    --sans: "Helvetica Neue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+
+    --edge: clamp(1.25rem, 5vw, 6rem);
+    --maxw: 1240px;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --pine: #F1EEE2;
+      --pine-2: #EAE6D6;
+      --surface: #FBF8EE;
+      --surface-2: #F1ECDC;
+      --hairline: rgba(26, 40, 30, 0.14);
+      --chalk: #16241B;
+      --chalk-dim: #3A4A40;
+      --sage: #5C6E62;
+      --sage-dim: #8A9A8E;
+      --brass: #9A7726;
+      --brass-bright: #B08A34;
+      --brass-deep: #D8BE7A;
+      --turf: #4E7A44;
+      --glow: rgba(154, 119, 38, 0.18);
+    }
+  }
+  :root[data-theme="dark"] {
+    --pine: #0E1611; --pine-2: #131E17; --surface: #17251D; --surface-2: #1F3128;
+    --hairline: rgba(240, 238, 228, 0.12); --chalk: #F0EEE4; --chalk-dim: #CBCBBD;
+    --sage: #9DB0A2; --sage-dim: #6E8177; --brass: #C9A24B; --brass-bright: #E0BC66;
+    --brass-deep: #8A6C2C; --turf: #6FA05E; --glow: rgba(201, 162, 75, 0.24);
+  }
+  :root[data-theme="light"] {
+    --pine: #F1EEE2; --pine-2: #EAE6D6; --surface: #FBF8EE; --surface-2: #F1ECDC;
+    --hairline: rgba(26, 40, 30, 0.14); --chalk: #16241B; --chalk-dim: #3A4A40;
+    --sage: #5C6E62; --sage-dim: #8A9A8E; --brass: #9A7726; --brass-bright: #B08A34;
+    --brass-deep: #D8BE7A; --turf: #4E7A44; --glow: rgba(154, 119, 38, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0; background: var(--pine); color: var(--chalk);
+    font-family: var(--sans); font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+    line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    overflow-x: hidden; transition: background 0.5s ease, color 0.5s ease;
+  }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 400; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--brass); display: inline-flex; align-items: center; gap: 0.7em;
+  }
+  .eyebrow::before { content: ""; width: 1.9rem; height: 1px; background: currentColor; opacity: 0.7; }
+
+  :focus-visible { outline: 2px solid var(--brass-bright); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--edge); }
+
+  /* ---------- NAV ---------- */
+  header { position: fixed; inset: 0 0 auto 0; z-index: 50; border-bottom: 1px solid transparent;
+    transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease; }
+  header.scrolled { background: color-mix(in srgb, var(--pine) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.2); border-bottom-color: var(--hairline); }
+  .nav { max-width: var(--maxw); margin: 0 auto; padding: 1.15rem var(--edge);
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .brand { font-family: var(--serif); font-size: 1.3rem; letter-spacing: 0.34em; padding-left: 0.34em;
+    text-transform: uppercase; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.55em; }
+  .brand .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brass);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brass) 30%, transparent); }
+  .nav-links { display: flex; gap: 2.1rem; align-items: center; }
+  .nav-links a { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--chalk-dim); position: relative; padding: 0.3rem 0; transition: color 0.25s ease; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0; background: var(--brass); transition: width 0.28s ease; }
+  .nav-links a:hover { color: var(--chalk); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .icon-btn { background: none; border: none; color: var(--chalk-dim); cursor: pointer;
+    font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 0.5em; padding: 0.4rem; transition: color 0.25s ease; }
+  .icon-btn:hover { color: var(--chalk); }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+
+  /* ---------- BUTTONS ---------- */
+  .btn { display: inline-flex; align-items: center; gap: 0.7em; cursor: pointer;
+    font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 0.95rem 1.7rem; border-radius: 2px; border: 1px solid transparent;
+    transition: transform 0.2s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+  .btn .arrow { transition: transform 0.25s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn-primary { background: var(--brass); color: #14100a; font-weight: 600; }
+  .btn-primary:hover { background: var(--brass-bright); transform: translateY(-2px); }
+  .btn-ghost { border-color: var(--hairline); color: var(--chalk); }
+  .btn-ghost:hover { border-color: var(--brass); color: var(--brass); }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding-top: 5rem; }
+  .hero-glow { position: absolute; z-index: 0; width: 80vw; height: 80vw; max-width: 920px; max-height: 920px;
+    right: -16vw; top: 50%; transform: translateY(-50%);
+    background: radial-gradient(circle at center, var(--glow) 0%, rgba(201,162,75,0.06) 40%, transparent 68%); pointer-events: none; }
+  .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 0.9fr;
+    align-items: center; gap: clamp(2rem, 5vw, 5rem); width: 100%; }
+  .hero-copy { max-width: 38ch; }
+  .hero h1 { font-size: clamp(3.1rem, 1.9rem + 6vw, 6.2rem); line-height: 0.95; letter-spacing: -0.015em; margin: 1.5rem 0 0; }
+  .hero h1 em { font-style: italic; color: var(--brass); }
+  .hero-sub { margin-top: 1.8rem; color: var(--sage); font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.2rem); max-width: 44ch; }
+  .hero-cta { display: flex; gap: 1rem; margin-top: 2.6rem; flex-wrap: wrap; }
+  .hero-meta { margin-top: 3.2rem; display: flex; gap: 2.4rem; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-dim); }
+  .hero-meta b { display: block; color: var(--chalk); font-size: 1.5rem; font-family: var(--serif); letter-spacing: 0; text-transform: none; margin-bottom: 0.15rem; }
+
+  /* Golf ball — dimpled sphere with a brass monogram crest, pure CSS */
+  .ball-stage { position: relative; justify-self: center; width: min(42vw, 430px); aspect-ratio: 1; }
+  .ball-shadow { position: absolute; left: 50%; bottom: -4%; width: 62%; height: 8%; transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.5), transparent 70%); filter: blur(6px); }
+  .ball { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; animation: bob 6s ease-in-out infinite;
+    background: radial-gradient(circle at 34% 28%, #ffffff 0%, #efece1 38%, #d3d0c3 68%, #a7a495 100%);
+    box-shadow: inset -34px -30px 70px rgba(0,0,0,0.30), inset 22px 20px 55px rgba(255,255,255,0.55), 0 46px 90px -22px rgba(0,0,0,0.62); }
+  .ball::before { content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background-image:
+      radial-gradient(circle, rgba(70,70,58,0.16) 2.1px, transparent 2.5px),
+      radial-gradient(circle, rgba(70,70,58,0.16) 2.1px, transparent 2.5px);
+    background-size: 26px 26px, 26px 26px; background-position: 0 0, 13px 13px;
+    -webkit-mask: radial-gradient(circle at 44% 40%, #000 52%, transparent 90%);
+            mask: radial-gradient(circle at 44% 40%, #000 52%, transparent 90%); }
+  .crest { position: absolute; inset: 0; display: grid; place-items: center; }
+  .crest .ring { width: 33%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--brass-deep);
+    display: grid; place-items: center; background: radial-gradient(circle at 40% 34%, rgba(255,255,255,0.6), rgba(201,162,75,0.12));
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+  .crest .ring span { font-family: var(--serif); font-size: clamp(1.6rem, 6vw, 2.8rem); color: #7a5f22; line-height: 1; }
+  .crest .tag { position: absolute; bottom: 21%; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: #6a6658; white-space: nowrap; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .ball-stage { display: none; }
+    .hero { min-height: auto; padding-block: 8rem 4rem; }
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { position: relative; z-index: 2; }
+  .band { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .band-head { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 3.2rem; flex-wrap: wrap; }
+  .band-head h2 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.2rem); line-height: 1.02; letter-spacing: -0.01em; max-width: 17ch; }
+  .band-head .lede { color: var(--sage); max-width: 34ch; }
+
+  /* ---------- MARQUEE (scorecard-style ticker) ---------- */
+  .ticker { border-block: 1px solid var(--hairline); background: var(--pine-2); overflow: hidden; }
+  .ticker-track { display: flex; gap: 3.5rem; padding: 1rem 0; white-space: nowrap; width: max-content; animation: slide 30s linear infinite; }
+  .ticker-track span { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage);
+    display: inline-flex; align-items: center; gap: 0.9rem; }
+  .ticker-track span::before { content: "⛳"; font-size: 0.7rem; filter: grayscale(0.2); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- KIT / PRODUCTS ---------- */
+  .grid-kit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 900px) { .grid-kit { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .grid-kit { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+
+  .card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 6px; padding: 1.6rem;
+    display: flex; flex-direction: column; gap: 1rem; position: relative; overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+  .card:hover { transform: translateY(-6px); border-color: color-mix(in srgb, var(--brass) 45%, var(--hairline)); background: var(--surface-2); }
+  .card-swatch { width: 100%; aspect-ratio: 1.35; border-radius: 5px; position: relative; overflow: hidden;
+    background: var(--sw, linear-gradient(150deg, #24382c, #16241b)); border: 1px solid var(--hairline);
+    display: grid; place-items: center; }
+  .card-swatch .glyph { font-size: 2.4rem; filter: saturate(0.9); }
+  .card-swatch .mark { position: absolute; top: 0.7rem; right: 0.7rem; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    border: 1.5px solid var(--brass); display: grid; place-items: center; font-family: var(--serif); font-size: 0.85rem;
+    color: var(--brass); background: color-mix(in srgb, var(--pine) 55%, transparent); }
+  .kit-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; }
+  .card h3 { font-size: 1.4rem; line-height: 1; }
+  .kit-spec { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--sage-dim); text-transform: uppercase; white-space: nowrap; }
+  .card-notes { color: var(--sage); font-size: 0.92rem; line-height: 1.55; }
+  .kit-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.4rem; }
+  .tag-pill { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.6rem; border-radius: 999px; border: 1px solid var(--hairline); color: var(--chalk-dim); }
+  .tag-pill.brass { border-color: color-mix(in srgb, var(--brass) 55%, transparent); color: var(--brass); }
+
+  /* ---------- CUSTOMISATION SPLIT ---------- */
+  .custom { background: var(--pine-2); border-block: 1px solid var(--hairline); }
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  @media (max-width: 780px) { .tiers { grid-template-columns: 1fr; } }
+  .tier { border: 1px solid var(--hairline); border-radius: 8px; padding: clamp(1.6rem, 3vw, 2.4rem);
+    background: var(--surface); position: relative; overflow: hidden; }
+  .tier.feat { border-color: color-mix(in srgb, var(--brass) 50%, var(--hairline));
+    background: radial-gradient(120% 120% at 100% 0%, rgba(201,162,75,0.14), transparent 55%), var(--surface); }
+  .tier .lvl { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }
+  .tier h3 { font-size: 1.9rem; line-height: 1; margin-top: 0.7rem; }
+  .tier p { color: var(--sage); margin-top: 0.9rem; font-size: 0.96rem; }
+  .tier ul { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 0.7rem; }
+  .tier li { display: grid; grid-template-columns: auto 1fr; gap: 0.7rem; align-items: start; font-size: 0.92rem; color: var(--chalk-dim); }
+  .tier li::before { content: ""; width: 8px; height: 8px; margin-top: 0.5rem; border-radius: 50%; background: var(--brass); }
+
+  /* ---------- PLANS ---------- */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch; }
+  @media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+  .plan { border: 1px solid var(--hairline); border-radius: 8px; padding: 1.9rem; background: var(--surface);
+    display: flex; flex-direction: column; gap: 0.5rem; transition: transform 0.3s ease, border-color 0.3s ease; }
+  .plan:hover { transform: translateY(-6px); }
+  .plan.pop { border-color: var(--brass); box-shadow: 0 30px 70px -30px rgba(201,162,75,0.4); }
+  .plan .pop-flag { align-self: flex-start; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #14100a; background: var(--brass); padding: 0.3rem 0.6rem; border-radius: 999px; margin-bottom: 0.6rem; }
+  .plan .pname { font-family: var(--serif); font-size: 1.7rem; }
+  .plan .cadence { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage-dim); }
+  .plan .cost { font-family: var(--serif); font-size: 2.8rem; margin: 1rem 0 0.2rem; display: flex; align-items: baseline; gap: 0.3rem; }
+  .plan .cost small { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--sage); text-transform: none; }
+  .plan ul { list-style: none; padding: 0; margin: 1.2rem 0 1.6rem; display: grid; gap: 0.7rem; }
+  .plan li { font-size: 0.9rem; color: var(--chalk-dim); display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+  .plan li b { color: var(--brass); font-family: var(--serif); }
+  .plan .btn { justify-content: center; margin-top: auto; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+  .step { border-top: 1px solid var(--hairline); padding-top: 1.4rem; }
+  .step .n { font-family: var(--mono); font-size: 0.8rem; color: var(--brass); letter-spacing: 0.1em; }
+  .step h3 { font-size: 1.5rem; margin-top: 0.8rem; line-height: 1.05; }
+  .step p { color: var(--sage); margin-top: 0.7rem; font-size: 0.95rem; }
+
+  /* ---------- CTA ---------- */
+  .cta-band { position: relative; overflow: hidden; border-radius: 10px; margin-block: clamp(4rem,8vw,7rem);
+    padding: clamp(2.6rem, 5vw, 5rem); text-align: center;
+    background: radial-gradient(90% 140% at 50% -10%, rgba(201,162,75,0.30), transparent 60%), var(--surface);
+    border: 1px solid var(--hairline); }
+  .cta-band h2 { font-size: clamp(2.1rem, 1.4rem + 3vw, 3.6rem); line-height: 1; margin-top: 1rem; }
+  .cta-band p { color: var(--sage); max-width: 46ch; margin: 1.3rem auto 0; }
+  .cta-form { display: flex; gap: 0.7rem; max-width: 460px; margin: 2.2rem auto 0; flex-wrap: wrap; }
+  .cta-form input { flex: 1 1 220px; background: var(--pine); border: 1px solid var(--hairline); border-radius: 2px;
+    color: var(--chalk); padding: 0.95rem 1.1rem; font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.04em; }
+  .cta-form input::placeholder { color: var(--sage-dim); }
+  .cta-note { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage-dim); margin-top: 1.3rem; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--hairline); padding-block: 3.5rem; }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; gap: 2.4rem; } }
+  .foot-brand p { color: var(--sage); font-size: 0.9rem; margin-top: 1.1rem; max-width: 30ch; }
+  .foot-col h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-dim); margin: 0 0 1.1rem; font-weight: 400; }
+  .foot-col a { display: block; color: var(--chalk-dim); font-size: 0.9rem; padding: 0.32rem 0; transition: color 0.2s ease; }
+  .foot-col a:hover { color: var(--brass); }
+  .foot-base { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--hairline); flex-wrap: wrap; }
+  .foot-base span { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--sage-dim); text-transform: uppercase; }
+
+  /* ---------- FAQ ---------- */
+  .faq { display: grid; gap: 0.8rem; max-width: 840px; }
+  .faq details { border: 1px solid var(--hairline); border-radius: 6px; background: var(--surface); overflow: hidden;
+    transition: border-color 0.25s ease; }
+  .faq details[open] { border-color: color-mix(in srgb, var(--brass) 40%, var(--hairline)); }
+  .faq summary { cursor: pointer; list-style: none; padding: 1.2rem 1.4rem; font-family: var(--serif); font-size: 1.18rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; transition: color 0.2s ease; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: var(--mono); color: var(--brass); font-size: 1.4rem; line-height: 1; transition: transform 0.28s ease; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq summary:hover { color: var(--brass); }
+  .faq-a { padding: 0 1.4rem 1.35rem; color: var(--sage); font-size: 0.96rem; line-height: 1.6; max-width: 64ch; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <nav class="nav">
+    <a class="brand" href="#top"><span class="dot"></span>Mulligan&nbsp;&amp;&nbsp;Co.</a>
+    <div class="nav-links">
+      <a href="#kit">The Kit</a>
+      <a href="#customise">Customise</a>
+      <a href="#plans">Membership</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle light and dark theme"><span id="theme-label">Light</span></button>
+      <a class="btn btn-primary" href="#plans" style="padding:0.7rem 1.2rem;">Join</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Subscription golf, customised</span>
+        <h1>Your game, <em>on repeat.</em></h1>
+        <p class="hero-sub">A membership that keeps you stocked with the consumables you burn through — tees, gloves, caps, polos and balls — each one carrying your logo, monogram, or a design made entirely to your liking.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#plans">Build your kit <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#customise">See customisation</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>5</b>Consumables covered</div>
+          <div><b>2</b>Levels of custom</div>
+          <div><b>You set</b>The cadence</div>
+        </div>
+      </div>
+      <div class="ball-stage" aria-hidden="true">
+        <div class="ball">
+          <div class="crest">
+            <div class="ring"><span>M</span></div>
+            <div class="tag">Your logo here</div>
+          </div>
+        </div>
+        <div class="ball-shadow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Bamboo tour tees</span><span>Cabretta leather glove</span><span>Structured crest cap</span>
+      <span>Performance polo</span><span>Tour-grade balls</span><span>Your logo, every piece</span>
+      <span>Bamboo tour tees</span><span>Cabretta leather glove</span><span>Structured crest cap</span>
+      <span>Performance polo</span><span>Tour-grade balls</span><span>Your logo, every piece</span>
+    </div>
+  </div>
+
+  <!-- KIT -->
+  <section class="band" id="kit">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <span class="eyebrow">The consumables</span>
+          <h2>Everything that runs out, on repeat.</h2>
+        </div>
+        <p class="lede">Pick what goes in your box. Every item is personalised before it ships — nothing generic ever lands on your doorstep.</p>
+      </div>
+      <div class="grid-kit">
+        <article class="card">
+          <div class="card-swatch" style="--sw:linear-gradient(150deg,#2b4133,#16241b);"><span class="glyph">🏌️</span><span class="mark">M</span></div>
+          <div class="kit-top"><h3>Tour Tees</h3><span class="kit-spec">70mm · bamboo</span></div>
+          <p class="card-notes">Sustainable bamboo tees printed with your mark down the stem. Twenty per box, because they never come home.</p>
+          <div class="kit-tags"><span class="tag-pill brass">Logo</span><span class="tag-pill">Colour</span></div>
+        </article>
+        <article class="card">
+          <div class="card-swatch" style="--sw:linear-gradient(150deg,#3a3d2a,#20221a);"><span class="glyph">🧤</span><span class="mark">M</span></div>
+          <div class="kit-top"><h3>Cabretta Glove</h3><span class="kit-spec">S–XL · L/R</span></div>
+          <p class="card-notes">Premium cabretta leather with a monogram embossed on the cuff. Sized to your hand, swapped every cycle.</p>
+          <div class="kit-tags"><span class="tag-pill brass">Monogram</span><span class="tag-pill">Fit</span></div>
+        </article>
+        <article class="card">
+          <div class="card-swatch" style="--sw:linear-gradient(150deg,#243a3d,#161f22);"><span class="glyph">🧢</span><span class="mark">M</span></div>
+          <div class="kit-top"><h3>Crest Cap</h3><span class="kit-spec">Structured · strap</span></div>
+          <p class="card-notes">A structured six-panel with your crest embroidered front and centre. Choose the shell, thread and closure.</p>
+          <div class="kit-tags"><span class="tag-pill brass">Embroidery</span><span class="tag-pill">Full custom</span></div>
+        </article>
+        <article class="card">
+          <div class="card-swatch" style="--sw:linear-gradient(150deg,#2f3548,#191d28);"><span class="glyph">👕</span><span class="mark">M</span></div>
+          <div class="kit-top"><h3>Performance Polo</h3><span class="kit-spec">XS–XXL</span></div>
+          <p class="card-notes">Four-way-stretch, moisture-wicking polo. Add a chest logo, or design the whole piece from collar to hem.</p>
+          <div class="kit-tags"><span class="tag-pill brass">Logo</span><span class="tag-pill">Full custom</span></div>
+        </article>
+        <article class="card">
+          <div class="card-swatch" style="--sw:radial-gradient(circle at 40% 34%,#f2efe6,#c9c6ba 70%,#a4a294);"><span class="glyph" style="filter:none;">⛳</span><span class="mark">M</span></div>
+          <div class="kit-top"><h3>Tour Balls</h3><span class="kit-spec">Dozen · 3-piece</span></div>
+          <p class="card-notes">Tour-grade urethane balls stamped with your logo on every one. A fresh dozen each cycle, alignment mark included.</p>
+          <div class="kit-tags"><span class="tag-pill brass">Logo</span><span class="tag-pill">Alignment</span></div>
+        </article>
+        <article class="card" style="justify-content:center; text-align:center; align-items:center; background:transparent; border-style:dashed;">
+          <span class="glyph" style="font-size:2rem;">＋</span>
+          <h3 style="font-size:1.25rem;">Build your own box</h3>
+          <p class="card-notes" style="max-width:22ch;">Mix any of the above. Add or drop items anytime from your locker.</p>
+          <a class="btn btn-ghost" href="#plans" style="padding:0.7rem 1.2rem;">Start building</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMISE -->
+  <section class="band custom" id="customise">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <span class="eyebrow">Two ways to make it yours</span>
+          <h2>From a simple mark to a full custom kit.</h2>
+        </div>
+        <p class="lede">Upload a logo and we'll place it cleanly across your gear — or work with our studio to design every piece from scratch.</p>
+      </div>
+      <div class="tiers">
+        <div class="tier">
+          <span class="lvl">Level 01</span>
+          <h3>Signature Mark</h3>
+          <p>The fast lane. Send us a logo or monogram and we handle placement, sizing and colour-matching across everything in your box.</p>
+          <ul>
+            <li>Upload any logo, or build a monogram in-app</li>
+            <li>Automatic clean placement on every item</li>
+            <li>Colour-matched to your brand or club</li>
+            <li>Proof approved before anything ships</li>
+          </ul>
+        </div>
+        <div class="tier feat">
+          <span class="lvl">Level 02</span>
+          <h3>Full Custom</h3>
+          <p>The whole thing, exactly to your liking. Patterns, panel colours, placement, typography — designed with our studio and yours to keep.</p>
+          <ul>
+            <li>One-to-one session with a Mulligan &amp; Co. designer</li>
+            <li>Bespoke polos, caps and headcovers</li>
+            <li>Team, event and corporate kit at any quantity</li>
+            <li>Digital mock-ups before a stitch is sewn</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="band" id="plans">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <span class="eyebrow">Membership</span>
+          <h2>Pick a rhythm. Change it whenever.</h2>
+        </div>
+        <p class="lede">Every plan includes Signature Mark customisation. Skip, pause, or swap items from your locker at any time.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <div class="pname">The Weekender</div>
+          <div class="cadence">Every quarter</div>
+          <div class="cost">£29<small>/mo, billed quarterly</small></div>
+          <ul>
+            <li><b>›</b> Choose <b>2</b> consumables per box</li>
+            <li><b>›</b> Tees + a dozen balls, restocked</li>
+            <li><b>›</b> Signature Mark included</li>
+            <li><b>›</b> Free UK delivery</li>
+          </ul>
+          <a class="btn btn-ghost" href="#join">Choose plan</a>
+        </div>
+        <div class="plan pop">
+          <span class="pop-flag">Most popular</span>
+          <div class="pname">The Regular</div>
+          <div class="cadence">Every month</div>
+          <div class="cost">£49<small>/mo</small></div>
+          <ul>
+            <li><b>›</b> Choose <b>4</b> consumables per box</li>
+            <li><b>›</b> Glove + polo rotation included</li>
+            <li><b>›</b> Signature Mark included</li>
+            <li><b>›</b> Priority delivery + members' locker</li>
+          </ul>
+          <a class="btn btn-primary" href="#join">Choose plan <span class="arrow">→</span></a>
+        </div>
+        <div class="plan">
+          <div class="pname">The Tour</div>
+          <div class="cadence">Every month</div>
+          <div class="cost">£89<small>/mo</small></div>
+          <ul>
+            <li><b>›</b> The <b>full kit</b>, every cycle</li>
+            <li><b>›</b> <b>Full Custom</b> design included</li>
+            <li><b>›</b> Dedicated designer + early drops</li>
+            <li><b>›</b> Team & event kit at cost</li>
+          </ul>
+          <a class="btn btn-ghost" href="#join">Choose plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="band" id="how" style="background:var(--pine-2); border-block:1px solid var(--hairline);">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <span class="eyebrow">How it works</span>
+          <h2>Three steps between you and a full bag.</h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="n">01</span>
+          <h3>Build your box</h3>
+          <p>Choose your consumables and how often they arrive. Set your sizes once and we remember them.</p>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <h3>Add your mark</h3>
+          <p>Upload a logo for the Signature Mark, or book a studio session for a full custom design. Approve the proof.</p>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <h3>Play, restock, repeat</h3>
+          <p>Fresh, personalised gear lands on schedule. Adjust anything from your locker before the next cycle ships.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="band" id="faq">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <span class="eyebrow">Good to know</span>
+          <h2>Questions, answered.</h2>
+        </div>
+        <p class="lede">Sizing, customisation and how the membership flexes around your golf — the things people ask before joining.</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>How does the customisation actually work?</summary>
+          <div class="faq-a">Every plan includes <strong>Signature Mark</strong>: upload a logo or build a monogram in-app, and we place, size and colour-match it across your box. Want more? <strong>Full Custom</strong> (included on The Tour) pairs you with a designer to build pieces from scratch. Either way, you approve a digital proof before anything is made.</div>
+        </details>
+        <details>
+          <summary>What if my sizes change?</summary>
+          <div class="faq-a">Set your glove hand, apparel sizes and preferences once in your members' locker. Update them anytime and your next box adjusts automatically — no re-ordering, no fuss.</div>
+        </details>
+        <details>
+          <summary>Can I skip, pause, or cancel?</summary>
+          <div class="faq-a">Yes — all from your locker, anytime before a cycle ships. Skip a month, pause for the off-season, or cancel outright. There's no lock-in and no cancellation fee.</div>
+        </details>
+        <details>
+          <summary>What logo formats do you accept?</summary>
+          <div class="faq-a">PNG, SVG or PDF all work; a vector file (SVG/PDF) gives the crispest result. Our studio cleans up and colour-matches whatever you send, then returns a proof for approval before production.</div>
+        </details>
+        <details>
+          <summary>How soon does my first box arrive?</summary>
+          <div class="faq-a">Your first box ships within a week of approving your proof. After that, boxes arrive on the cadence you choose — quarterly on The Weekender, monthly on The Regular and The Tour.</div>
+        </details>
+        <details>
+          <summary>Do you ship outside the UK?</summary>
+          <div class="faq-a">Delivery is free across the UK on every plan, and we ship worldwide with rates calculated at checkout. Sizing and customisation work exactly the same wherever you play.</div>
+        </details>
+        <details>
+          <summary>Can you handle team, event or corporate kit?</summary>
+          <div class="faq-a">Absolutely. The Tour tier includes team and event kit at cost, in any quantity — society days, corporate outings or a full club roster. Tell us what you need and we'll build it.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap" id="join">
+    <div class="cta-band">
+      <span class="eyebrow" style="justify-content:center;">First box ships in a week</span>
+      <h2>Never run out of your gear again.</h2>
+      <p>Join the waitlist and we'll help you build your first box — customisation and all. Founding members lock in launch pricing for life.</p>
+      <form class="cta-form" onsubmit="return false;">
+        <input type="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button class="btn btn-primary" type="submit">Reserve my spot <span class="arrow">→</span></button>
+      </form>
+      <p class="cta-note">No commitment · Cancel anytime · Ships worldwide</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="dot"></span>Mulligan&nbsp;&amp;&nbsp;Co.</a>
+        <p>Subscription golf consumables, customised to your liking and delivered on your schedule.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <a href="#kit">The Kit</a>
+        <a href="#plans">Membership</a>
+        <a href="#customise">Customisation</a>
+        <a href="#join">Team & corporate</a>
+      </div>
+      <div class="foot-col">
+        <h4>Club</h4>
+        <a href="#how">How it works</a>
+        <a href="#top">Members' locker</a>
+        <a href="#top">Gift a membership</a>
+        <a href="#top">Referrals</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#top">Contact</a>
+        <a href="#top">Sustainability</a>
+        <a href="#top">Journal</a>
+        <a href="#top">Careers</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Mulligan &amp; Co. Golf</span>
+      <span>Your game · On repeat</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const root = document.documentElement;
+  const label = document.getElementById('theme-label');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const currentIsDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : prefersDark.matches);
+  const syncLabel = () => { label.textContent = currentIsDark() ? 'Light' : 'Dark'; };
+  syncLabel();
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    root.dataset.theme = currentIsDark() ? 'light' : 'dark';
+    syncLabel();
+  });
+  prefersDark.addEventListener('change', syncLabel);
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.band-head, .card, .tier, .plan, .step, .cta-band').forEach((el, i) => {
+    el.classList.add('reveal'); el.style.transitionDelay = (i % 3) * 0.08 + 's'; io.observe(el);
+  });
+</script>
+
+</body>
+</html>
