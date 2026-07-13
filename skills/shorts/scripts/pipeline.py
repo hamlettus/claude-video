@@ -85,9 +85,11 @@ def cmd_build(args) -> int:
     if args.voiceover_script:
         import voiceover  # local import keeps discover/build usable without TTS deps
         script = Path(args.voiceover_script).read_text(encoding="utf-8").strip()
-        voiceover_path = str(out.with_suffix(".vo.mp3"))
-        voiceover.synthesize(script, voiceover_path)
-        print(f"[shorts] voiceover -> {voiceover_path}", file=sys.stderr)
+        # synthesize returns the real path (extension varies by backend, e.g. piper -> .wav)
+        voiceover_path = voiceover.synthesize(
+            script, str(out.with_suffix(".vo.mp3")), backend=args.tts_backend
+        )
+        print(f"[shorts] voiceover ({args.tts_backend or 'default'}) -> {voiceover_path}", file=sys.stderr)
 
     music = args.music
     if music is None and args.soundtrack:
@@ -149,6 +151,9 @@ def main() -> int:
     b.add_argument("--out", default="out/short.mp4")
     b.add_argument("--source-id", default=None, help="YouTube id of the source video (marked processed)")
     b.add_argument("--voiceover-script", default=None, help="Text file to narrate via TTS")
+    b.add_argument("--tts-backend", default=None,
+                   choices=["edge", "piper", "gtts", "openai", "elevenlabs"],
+                   help="TTS backend for --voiceover-script (default: edge, free)")
     b.add_argument("--music", default=None)
     b.add_argument("--soundtrack", nargs="?", const="upbeat", default=None,
                    choices=["upbeat", "tense", "chill"],

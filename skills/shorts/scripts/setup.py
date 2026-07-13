@@ -41,7 +41,18 @@ ENV_TEMPLATE = """# /shorts configuration — autonomous stick-figure shorts fac
 # SHORTS_TRENDING_SOURCE=https://www.youtube.com/feed/trending
 
 # --- Optional narration (text-to-speech) ---
+# Voiceover is FREE by default. Pick a backend with SHORTS_TTS:
+#   edge   FREE, no key, needs internet — `pip install edge-tts` (default, best value)
+#   piper  FREE, offline — install piper + set SHORTS_PIPER_MODEL to a .onnx voice
+#   gtts   FREE, no key, needs internet — `pip install gTTS`
+#   openai / elevenlabs  PAID — set the matching key below
+# SHORTS_TTS=edge
+# SHORTS_TTS_VOICE=en-US-GuyNeural     # edge voice / gtts lang / piper model path
+# SHORTS_PIPER_MODEL=/path/to/en_US-amy-medium.onnx
+# SHORTS_PIPER_BIN=piper
 # OPENAI_API_KEY=
+# ELEVENLABS_API_KEY=
+# ELEVENLABS_VOICE_ID=21m00Tcm4TlvDq8ikWAM
 
 # --- Optional publishing credentials (dry-run until you pass --live) ---
 # YouTube Data API v3 (OAuth access token with youtube.upload scope):

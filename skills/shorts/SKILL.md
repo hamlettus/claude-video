@@ -121,11 +121,19 @@ Frames are generated in pure Python and streamed straight into ffmpeg (no giant 
 
 **Give it sound (do this by default).** A silent short kills retention. `--soundtrack [upbeat|tense|chill]` generates a royalty-free chiptune bed (bass + arpeggio + kick/hats) **in pure Python** (`soundtrack.py`, stdlib `wave`), matched to the short's length and muxed in — no audio files, no API key, nothing to license. Pick the mood to fit the story (`tense` for suspense beats, `chill` for calmer ones). Skipped automatically if you pass `--music` or a `--voiceover`.
 
-**Optional voiceover** (needs `OPENAI_API_KEY` in the config): synthesize narration, then mux it (narration takes priority; drop `--soundtrack` or layer `--music` ducked under it):
+**Optional voiceover — free by default.** `voiceover.py` is backend-pluggable and defaults to a **free** engine (no API key):
+
+- `edge` (default) — Microsoft neural voices, free, no key, needs internet (`pip install edge-tts`). Best quality-for-free.
+- `piper` — local neural TTS, free and **offline** after a one-time model download (set `SHORTS_PIPER_MODEL`).
+- `gtts` — Google Translate TTS, free, no key, needs internet.
+- `openai` / `elevenlabs` — paid, only if you set the matching key.
+
+Synthesize narration, then mux it (narration takes priority; drop `--soundtrack` or layer `--music` ducked under it). `voiceover.py` prints the real output path — use it (piper emits `.wav`):
 
 ```bash
-python3 "${SKILL_DIR}/scripts/voiceover.py" --file script.txt -o out/vo.mp3
-python3 "${SKILL_DIR}/scripts/animate.py" storyboard.json -o out/short.mp4 --voiceover out/vo.mp3 --music bed.mp3
+VO=$(python3 "${SKILL_DIR}/scripts/voiceover.py" --file script.txt -o out/vo.mp3)   # edge (free) by default
+# or offline: --backend piper --voice /path/to/model.onnx
+python3 "${SKILL_DIR}/scripts/animate.py" storyboard.json -o out/short.mp4 --voiceover "$VO" --music bed.mp3
 ```
 
 Background music is ducked under narration automatically. Provide your own royalty-free bed — do not lift the source video's audio.
@@ -203,6 +211,6 @@ Schedule it with the host's own scheduler — e.g. a Claude Code Routine / `crea
 
 ## Security & Permissions
 
-**What this skill does:** runs `yt-dlp` (public trending metadata + transcript of a source you choose), `ffmpeg` (encodes locally generated frames), optionally calls a TTS API (only if `OPENAI_API_KEY` is set) and the YouTube/Meta publishing APIs (**only** with your credentials and an explicit `--live`). Reads/writes `~/.config/shorts/.env` (mode `0600`) for settings + credentials, and a state dir for the processed-list and ledger.
+**What this skill does:** runs `yt-dlp` (public trending metadata + transcript of a source you choose), `ffmpeg` (encodes locally generated frames), synthesizes an original soundtrack locally, optionally synthesizes a voiceover (free `edge`/`piper`/`gtts` backends, or a paid API only if you set its key) and calls the YouTube/Meta publishing APIs (**only** with your credentials and an explicit `--live`). Reads/writes `~/.config/shorts/.env` (mode `0600`) for settings + credentials, and a state dir for the processed-list and ledger.
 
 **What it does NOT do:** post anything without `--live`; upload the source video's footage or audio; access an account for which you didn't provide a token; print or log any credential. Bundled scripts: `trending.py`, `stickman.py` (animation engine), `animate.py` (encode), `voiceover.py` (optional TTS), `publish.py` (uploaders), `pipeline.py` (orchestrator), `setup.py` (preflight/installer). Review them before first use.
