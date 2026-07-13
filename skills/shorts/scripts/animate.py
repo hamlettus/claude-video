@@ -167,6 +167,16 @@ def main() -> int:
     ap.add_argument("-o", "--out", default="short.mp4", help="Output MP4 path")
     ap.add_argument("--voiceover", default=None, help="Voiceover audio file to mux (mp3/m4a/wav)")
     ap.add_argument("--music", default=None, help="Background music file (ducked under voiceover)")
+    ap.add_argument(
+        "--soundtrack",
+        nargs="?",
+        const="upbeat",
+        default=None,
+        choices=["upbeat", "tense", "chill"],
+        help="Generate a royalty-free chiptune bed (pure stdlib) matched to the "
+             "short's length and mux it in. Optional mood (default: upbeat). "
+             "Ignored if --music is given.",
+    )
     ap.add_argument("--music-gain", type=float, default=-18.0, help="Music gain in dB (default -18)")
     ap.add_argument("--crf", type=int, default=20, help="x264 CRF quality (lower = better, default 20)")
     ap.add_argument("--thumbnail", default=None, help="Write the first frame as PNG here and exit")
@@ -195,11 +205,19 @@ def main() -> int:
         print(args.thumbnail)
         return 0
 
+    music = args.music
+    if music is None and args.soundtrack:
+        import soundtrack  # stdlib-only; imported lazily so silent renders skip it
+        bed = str(Path(args.out).with_suffix(".bed.wav"))
+        soundtrack.write_wav(bed, soundtrack.synth(sm.total_duration(storyboard), mood=args.soundtrack))
+        print(f"[shorts] soundtrack ({args.soundtrack}) -> {bed}", file=sys.stderr)
+        music = bed
+
     render_video(
         storyboard,
         args.out,
         voiceover=args.voiceover,
-        music=args.music,
+        music=music,
         music_gain_db=args.music_gain,
         crf=args.crf,
     )

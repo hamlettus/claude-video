@@ -89,10 +89,17 @@ def cmd_build(args) -> int:
         voiceover.synthesize(script, voiceover_path)
         print(f"[shorts] voiceover -> {voiceover_path}", file=sys.stderr)
 
+    music = args.music
+    if music is None and args.soundtrack:
+        import soundtrack
+        music = str(out.with_suffix(".bed.wav"))
+        soundtrack.write_wav(music, soundtrack.synth(animate.sm.total_duration(storyboard), mood=args.soundtrack))
+        print(f"[shorts] soundtrack ({args.soundtrack}) -> {music}", file=sys.stderr)
+
     animate.render_video(
         storyboard, str(out),
         voiceover=voiceover_path,
-        music=args.music,
+        music=music,
     )
     # Thumbnail from the opening frame.
     thumb = str(out.with_suffix(".thumb.png"))
@@ -143,6 +150,9 @@ def main() -> int:
     b.add_argument("--source-id", default=None, help="YouTube id of the source video (marked processed)")
     b.add_argument("--voiceover-script", default=None, help="Text file to narrate via TTS")
     b.add_argument("--music", default=None)
+    b.add_argument("--soundtrack", nargs="?", const="upbeat", default=None,
+                   choices=["upbeat", "tense", "chill"],
+                   help="Generate + mux a royalty-free chiptune bed (ignored if --music given)")
     b.set_defaults(func=cmd_build)
 
     lg = sub.add_parser("ledger", help="Print the production ledger")

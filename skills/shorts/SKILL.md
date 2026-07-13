@@ -113,12 +113,15 @@ python3 "${SKILL_DIR}/scripts/animate.py" --validate storyboard.json
 ### 4. Animate — render the MP4
 
 ```bash
-python3 "${SKILL_DIR}/scripts/animate.py" storyboard.json -o out/short.mp4
+# Always give a short sound — a silent short dies on Reels/Shorts:
+python3 "${SKILL_DIR}/scripts/animate.py" storyboard.json -o out/short.mp4 --soundtrack upbeat
 ```
 
 Frames are generated in pure Python and streamed straight into ffmpeg (no giant temp files). Preview a single frame without encoding: `--thumbnail thumb.png`.
 
-**Optional voiceover** (needs `OPENAI_API_KEY` in the config): synthesize narration, then mux it:
+**Give it sound (do this by default).** A silent short kills retention. `--soundtrack [upbeat|tense|chill]` generates a royalty-free chiptune bed (bass + arpeggio + kick/hats) **in pure Python** (`soundtrack.py`, stdlib `wave`), matched to the short's length and muxed in — no audio files, no API key, nothing to license. Pick the mood to fit the story (`tense` for suspense beats, `chill` for calmer ones). Skipped automatically if you pass `--music` or a `--voiceover`.
+
+**Optional voiceover** (needs `OPENAI_API_KEY` in the config): synthesize narration, then mux it (narration takes priority; drop `--soundtrack` or layer `--music` ducked under it):
 
 ```bash
 python3 "${SKILL_DIR}/scripts/voiceover.py" --file script.txt -o out/vo.mp3
