@@ -28,12 +28,24 @@ def test_validate_accepts_good_storyboard():
 def test_validate_flags_unknown_pose_bad_coord_and_duration():
     sb = {"scenes": [{
         "duration": 0,
-        "actors": [{"keyframes": [{"t": 0, "x": 1.5, "y": 0.6, "pose": "floss"}]}],
+        "actors": [{"keyframes": [{"t": 0, "x": 2.0, "y": 0.6, "pose": "floss"}]}],
     }]}
     problems = animate.validate(sb)
     assert any("duration" in p for p in problems)
     assert any("unknown pose" in p for p in problems)
-    assert any("out of 0..1" in p for p in problems)
+    assert any("out of" in p for p in problems)
+
+
+def test_validate_allows_offscreen_staging():
+    # x=1.05 (enter from the right) / x=-0.2 (exit left) are legal.
+    sb = {"scenes": [{
+        "duration": 2.0,
+        "actors": [{"keyframes": [
+            {"t": 0, "x": 1.05, "y": 0.6, "pose": "walk"},
+            {"t": 2, "x": -0.2, "y": 0.6, "pose": "walk"},
+        ]}],
+    }]}
+    assert animate.validate(sb) == []
 
 
 def test_validate_empty_scenes():

@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "bg": "#0e1116",
+    "fg": "#f5f5f5",
+    "accent": "#ffca28",
+    "outline": "#0a0d12"
+  },
+  "scenes": [
+    {
+      "duration": 3.5,
+      "title": "WHY SIDE PROJECTS DIE",
+      "bg": "#0e1116",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2a3444" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.32,
+          "keyframes": [
+            { "t": 0.0, "x": 0.50, "y": 0.66, "pose": "idle" },
+            { "t": 1.2, "x": 0.50, "y": 0.66, "pose": "talk" },
+            { "t": 3.5, "x": 0.50, "y": 0.66, "pose": "talk" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 5.0,
+      "caption": "Day 1: you are UNSTOPPABLE",
+      "bg": "#12261a",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2f5a3f" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.32,
+          "cadence": 3.0,
+          "keyframes": [
+            { "t": 0.0, "x": 0.15, "y": 0.66, "pose": "run" },
+            { "t": 3.2, "x": 0.68, "y": 0.66, "pose": "run" },
+            { "t": 4.0, "x": 0.72, "y": 0.66, "pose": "celebrate" },
+            { "t": 5.0, "x": 0.72, "y": 0.66, "pose": "celebrate" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 6.0,
+      "caption": "You build the logo. The landing page. Dark mode.",
+      "bg": "#101826",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2a3444" },
+        { "type": "rect", "x": 0.66, "y": 0.30, "w": 0.16, "h": 0.10, "color": "#ef5350" },
+        { "type": "rect", "x": 0.66, "y": 0.44, "w": 0.16, "h": 0.10, "color": "#42a5f5" },
+        { "type": "rect", "x": 0.66, "y": 0.58, "w": 0.16, "h": 0.10, "color": "#66bb6a" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.30,
+          "keyframes": [
+            { "t": 0.0, "x": 0.34, "y": 0.62, "pose": "idle" },
+            { "t": 1.4, "x": 0.34, "y": 0.62, "pose": "point" },
+            { "t": 3.0, "x": 0.34, "y": 0.62, "pose": "point" },
+            { "t": 4.2, "x": 0.34, "y": 0.62, "pose": "think" },
+            { "t": 6.0, "x": 0.34, "y": 0.62, "pose": "think" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 5.5,
+      "caption": "...everything except the actual product.",
+      "bg": "#1a1020",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#3a2a44" },
+        { "type": "rect", "x": 0.60, "y": 0.40, "w": 0.24, "h": 0.24, "color": "#241830" },
+        { "type": "disk", "x": 0.72, "y": 0.52, "r": 0.02, "color": "#5a4a66" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.30,
+          "keyframes": [
+            { "t": 0.0, "x": 0.32, "y": 0.62, "pose": "idle" },
+            { "t": 1.0, "x": 0.32, "y": 0.62, "pose": "shrug" },
+            { "t": 5.5, "x": 0.32, "y": 0.62, "pose": "shrug" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 6.0,
+      "caption": "Then real life shows up.",
+      "bg": "#0e1116",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2a3444" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.32,
+          "keyframes": [
+            { "t": 0.0, "x": 0.38, "y": 0.66, "pose": "idle" },
+            { "t": 2.6, "x": 0.38, "y": 0.66, "pose": "idle" },
+            { "t": 3.4, "x": 0.38, "y": 0.66, "pose": "fall" },
+            { "t": 6.0, "x": 0.38, "y": 0.66, "pose": "fall" }
+          ]
+        },
+        {
+          "id": "reality",
+          "color": "#ef5350",
+          "scale": 0.34,
+          "cadence": 2.4,
+          "keyframes": [
+            { "t": 0.0, "x": 1.05, "y": 0.66, "pose": "walk" },
+            { "t": 2.6, "x": 0.62, "y": 0.66, "pose": "walk" },
+            { "t": 3.4, "x": 0.62, "y": 0.66, "pose": "point" },
+            { "t": 6.0, "x": 0.62, "y": 0.66, "pose": "point" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 5.0,
+      "caption": "Motivation: gone.",
+      "bg": "#08090c",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#1c232e" },
+        { "type": "disk", "x": 0.62, "y": 0.68, "r": 0.03, "color": "#3a4250" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#c9a227",
+          "scale": 0.30,
+          "keyframes": [
+            { "t": 0.0, "x": 0.48, "y": 0.66, "pose": "sit" },
+            { "t": 5.0, "x": 0.48, "y": 0.66, "pose": "sit" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 7.0,
+      "title": "SHIP IT UGLY",
+      "caption": "in a single weekend.",
+      "bg": "#12261a",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2f5a3f" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.32,
+          "cadence": 4.0,
+          "keyframes": [
+            { "t": 0.0, "x": 0.50, "y": 0.66, "pose": "idle" },
+            { "t": 1.0, "x": 0.50, "y": 0.66, "pose": "jump" },
+            { "t": 2.2, "x": 0.50, "y": 0.66, "pose": "celebrate" },
+            { "t": 7.0, "x": 0.50, "y": 0.66, "pose": "celebrate" }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 5.0,
+      "caption": "Ugly + shipped beats perfect + imagined. Follow for more.",
+      "bg": "#0e1116",
+      "props": [
+        { "type": "ground", "y": 0.86, "color": "#2a3444" }
+      ],
+      "actors": [
+        {
+          "id": "hero",
+          "color": "#ffca28",
+          "scale": 0.32,
+          "keyframes": [
+            { "t": 0.0, "x": 0.50, "y": 0.62, "pose": "idle" },
+            { "t": 0.8, "x": 0.50, "y": 0.62, "pose": "wave" },
+            { "t": 5.0, "x": 0.50, "y": 0.62, "pose": "wave" }
+          ]
+        }
+      ]
+    }
+  ]
+}

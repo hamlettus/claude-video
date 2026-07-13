@@ -11,6 +11,7 @@ Agent Skills package that gives an agent a video input. Installable across Claud
 - `skills/shorts/SKILL.md` — contract for `/shorts`, the autonomous stick-figure shorts factory built on top of `/watch`.
 - `skills/shorts/scripts/stickman.py` — pure-stdlib animation engine: framebuffer rasterizer + stick-figure rig + built-in 5×7 font + storyboard→frames. No third-party deps; PNG export makes it testable without ffmpeg.
 - `skills/shorts/scripts/{animate,trending,voiceover,publish,pipeline,setup,shorts_config}.py` — ffmpeg encode (frames piped as raw rgb24), yt-dlp trending discovery + dedup, optional TTS, credential-gated dry-run/live publishers (YouTube/IG/FB), orchestrator + ledger, preflight/installer, shared config. `shorts_config.py` is deliberately name-distinct from watch's `config.py` so both skills coexist in one pytest process.
+- `skills/shorts/examples/` — a complete worked short (`side-project.storyboard.json` + `.meta.json` + README): 43s/8 scenes, every pose, two actors, off-screen staging, props, per-scene backgrounds. Renders as a template.
 - `hooks/` — Claude Code SessionStart setup-status hook (Claude Code only).
 - `.claude-plugin/` — `plugin.json` + `marketplace.json` (Claude Code plugin + local marketplace).
 - `.codex-plugin/plugin.json` — Codex/agents manifest; `"skills": "./skills/"` points the Agent Skills CLI at the self-contained skill folder.

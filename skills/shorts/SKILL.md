@@ -96,7 +96,7 @@ Write a `storyboard.json`. This is where the craft is: a punchy hook scene, 2–
 ```
 
 Authoring rules that make it look good:
-- **Coordinates are canvas fractions (0..1).** Stand actors around `y:0.60–0.70` and keep `scale:0.28–0.36` so feet clear the lower-third captions.
+- **Coordinates are canvas fractions (0..1);** values slightly outside (roughly `-0.5..1.5`) are allowed so actors can walk in from / exit past an edge (e.g. `x:1.05` to enter from the right). Stand actors around `y:0.60–0.70` and keep `scale:0.28–0.36` so feet clear the lower-third captions.
 - **Poses** (blend smoothly between keyframes): `idle, walk, run, wave, talk, point, jump, celebrate, think, shrug, fall, sit`. `walk`/`run` auto-cycle limbs; drive travel with the `x`/`y` on each keyframe.
 - **Props**: `ground` (floor line), `rect`, `line`, `disk`. Use them as objects, doorways, phones, money, etc.
 - **Captions** are the voice of the short — short, punchy, one idea per scene. The font is uppercase-styled and outlined for legibility on any background.
@@ -107,6 +107,8 @@ Validate before rendering:
 ```bash
 python3 "${SKILL_DIR}/scripts/animate.py" --validate storyboard.json
 ```
+
+**Worked example:** `${SKILL_DIR}/examples/side-project.storyboard.json` is a complete 43s/8-scene short (with a matching `.meta.json`) exercising every pose, two actors, off-screen entrances, props, and per-scene backgrounds. Read it as a template — see `examples/README.md`.
 
 ### 4. Animate — render the MP4
 

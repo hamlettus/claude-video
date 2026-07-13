@@ -50,11 +50,13 @@ def validate(storyboard: dict) -> list[str]:
                         f"scene {si} actor {ai} kf {ki}: unknown pose '{pose}' "
                         f"(valid: {', '.join(sorted(VALID_POSES))})"
                     )
+                # Allow a generous off-canvas margin so actors can walk in from
+                # or exit past the edges (e.g. x=1.05 to enter from the right).
                 for coord in ("x", "y"):
                     v = kf.get(coord, 0.5)
-                    if not (0.0 <= float(v) <= 1.0):
+                    if not (-0.5 <= float(v) <= 1.5):
                         problems.append(
-                            f"scene {si} actor {ai} kf {ki}: {coord}={v} out of 0..1"
+                            f"scene {si} actor {ai} kf {ki}: {coord}={v} out of -0.5..1.5"
                         )
     return problems
 
