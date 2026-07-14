@@ -1,4 +1,4 @@
-# Mulligan & Co. — website
+# Par & Parcel — website
 
 Landing page for a subscription service delivering **customised golf consumables**
 (tees, glove, cap, polo, balls), personalised from a simple logo up to a full
@@ -20,8 +20,15 @@ custom design.
   toggle in the top-right overrides the OS preference.
 - **Responsive** and respects `prefers-reduced-motion`.
 
+## Sections
+
+Hero (dimpled golf ball with a "P&P" monogram crest) · consumables kit grid ·
+two-tier customisation (Signature Mark / Full Custom) · membership plans ·
+how it works · FAQ · waitlist CTA · footer.
+
 ## Note on the name
 
-The name **Mulligan & Co.** is a placeholder and, at time of writing, conflicts
-with an existing golf-apparel brand (mulligannco.com) operating in the same
-custom-apparel niche. Run trademark/domain checks before committing to it.
+"Par & Parcel" cleared an initial web/trademark scan against golf-apparel brands
+(no direct conflict found), but this is **not** a legal clearance. Before
+committing, verify with the UK IPO / USPTO, check domain and social-handle
+availability, and ideally consult a trademark attorney.
